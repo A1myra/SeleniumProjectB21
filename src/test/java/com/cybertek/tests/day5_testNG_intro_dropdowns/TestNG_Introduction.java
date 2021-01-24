@@ -67,7 +67,7 @@ public class TestNG_Introduction {
         //assertEquals: expects two arguments of the same type: String VS String etc.
         Assert.assertEquals(str1,str3,"Asserting with assertEqual on line 67");
 
-        //teh last String argument will be accepts as"failure massage.
+        //the last String argument will be accepts as"failure massage.
 
     }
 }
