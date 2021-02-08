@@ -1,2 +1,3 @@
-# Project exclude paths
+/.idea/
+/seleniumprojectb21.iml
 /target/

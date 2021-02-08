@@ -1,40 +1,41 @@
 package com.cybertek.tests.day8_testbase_properties_driver;
 
-import org.openqa.selenium.By;
+import com.cybertek.Utilities.WebDriverFactory;
+import com.cybertek.Utilities.WebOrderUtils;
+import com.cybertek.tests.Base.testBase;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-public class WebTablePractice {
+import java.util.concurrent.TimeUnit;
 
+public class WebTablePractice extends testBase {
 
-    /*
-    make the method static so that we don't have to create instance of the class.
-     */
+    WebDriver driver;
 
-    public static void loginToSmartBear(WebDriver driver) {
-        //3. Enter username: “Tester”
-        WebElement inputUsername = driver.findElement(By.id("ctl00_MainContent_username"));
-        inputUsername.sendKeys("Tester");
+    @BeforeMethod
+    public void setUpMethod() {
+        //1. Open browser
+        driver = WebDriverFactory.getDriver("chrome");
 
-        //4. Enter password: “test”
-        WebElement inputPassword = driver.findElement(By.id("ctl00_MainContent_password"));
-        inputPassword.sendKeys("test");
-
-        //5. Click to Login button
-        WebElement loginButton = driver.findElement(By.id("ctl00_MainContent_login_button"));
-        loginButton.click();}
-
-        //PRACTICE #4: Method: verifyOrder•
-        //Create a method named verifyOrdering SmartBearUtils class.
-        // •Methodtakes WebDriver object and String(name).
-        //•Methodshould verify if given name exists in orders.
-        //•This method should simply accepts a name(String), and assert whether given name is in the list or not.
-        //•Create a new TestNG test to test if the method is working as expected.
-
-    public static void verifyOrder(WebDriver driver, String expectedName){
+        //2. Go to website: http://practice.cybertekschool.com/javascript_alerts
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
+    @Test
+    public void verify_order_test() throws InterruptedException{
+        driver.get("http://secure.smartbearsoftware.com/samples/TestComplete12/WebOrders/Login.aspx?ReturnUrl=%2fsamples%2fTestComplete12%2fWebOrders%2fDefault.aspx");
+
+        WebOrderUtils.loginToSmartBear(driver);
+
+        Thread.sleep(1000);
+
+        //Verify "Mark Smith" is in the list.
+        WebOrderUtils.verifyOrder(driver,"Mark Smith");
 
 
+
+    }
 }
